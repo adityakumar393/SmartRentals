@@ -1,71 +1,63 @@
-# RentSmart – Tenant & Landlord Agreement Manager
+# SmartRentals — Tenant & Landlord Agreement Manager
 
-A full-stack application to streamline rental agreements, rent tracking, and complaint resolution — empowering students and working professionals living away from home.
+SmartRentals is a full-stack platform to streamline rental agreements, rent tracking, and complaint resolution. It is designed to help students and working professionals avoid exploitation while enabling landlords to manage properties transparently.
 
-## Live Preview (Coming Soon)
+## Overview
 
+Disputes between tenants and landlords often arise due to lack of documentation, missed payments, or unresolved complaints. RentSmart addresses these pain points through:
 
-##  Problem Statement
-> Tenant-landlord disputes are common due to undocumented issues, missed rent, or untracked complaints.
+- Digital agreement creation and storage
+- Complaint logging with images
+- AI-based urgency classification
+- Admin dashboard for resolving issues
+- Rent payment tracking (upcoming)
 
-##  Our Solution
-
--  **Digital Agreement Creation** with e-sign support
--  **Rent Payment Tracking** + reminders
--  **Complaint Logging Dashboard** with image upload
--  **Neutral Arbitration Panel**
--  **AI-powered Complaint Urgency Detection** *(Coming Soon)*
 
 ---
 
-##  Tech Stack
-
-###  Auth
-- Firebase Authentication (OTP, Email)
+## Tech Stack
 
 ### Frontend
-- React + Tailwind CSS
-- Axios for API calls
-- React Router DOM
+- React.js (Vite)
+- Tailwind CSS
+- Axios
 
 ### Backend
-- Node.js + Express.js
-- MongoDB + Mongoose
-
-### Cloud & Dev Tools
+- Node.js + Express
+- MongoDB (Mongoose)
 - Cloudinary (image upload)
-- Dotenv
-- Nodemon
+
+### Auth & DevOps
+- Firebase Authentication (OTP + email) 
 - Git + GitHub
+- Dotenv for secrets
+- Nodemon for dev reloads
 
 ---
 
-## Features Built Till Now
+## Features
 
--  Complaint submission (text, image)
--  Cloudinary integration
--  Tenant & landlord dashboards
--  Complaint status resolution (admin)
--  Deployed backend API
+### Implemented Till Now
+- Complaint form with image upload
+- Cloudinary integration for image hosting
+- View and update complaint status (admin dashboard)
+- MongoDB-based complaint logging
+- Modular API routes and frontend components
 
----
-
-##  Upcoming Features
-
--  Firebase Auth (OTP/email)
--  AI-powered urgency detection (GPT-based / ML)
--  Rent payment tracking
--  Blockchain agreement hash verification
--  Role-based dashboards
--  Geo-tagging complaints
+### In Progress
+- Firebase Authentication (role-based)
+- Rent payment tracking (Stripe/Razorpay)
+- AI-powered complaint urgency detection
+- Agreement e-sign + PDF export
+- Blockchain-based agreement hash for proof
 
 ---
+### Contact
 
-## 📬 Contact
-
-Built by:   
+Built with by **Aditya Kumar**
+ECE'26 NIT Patna    
 [LinkedIn](https://linkedin.com/in/adityakumar393)
 
 ---
 
-> I am building up this project to empower tenants and keep housing fair and accountable in cities across the globe.
+> I'm building this project to empower tenants and promote fair, accountable housing experiences in cities around the world.
