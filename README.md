@@ -43,12 +43,14 @@ Disputes between tenants and landlords often arise due to lack of documentation,
 - View and update complaint status (admin dashboard)
 - MongoDB-based complaint logging
 - Modular API routes and frontend components
+- Firebase Authentication (role-based)
+- Agreement e-sign + PDF export
+- Urgency detection
 
 ### In Progress
-- Firebase Authentication (role-based)
+
 - Rent payment tracking (Stripe/Razorpay)
 - AI-powered complaint urgency detection
-- Agreement e-sign + PDF export
 - Blockchain-based agreement hash for proof
 
 ---
