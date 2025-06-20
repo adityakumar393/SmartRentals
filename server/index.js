@@ -8,26 +8,25 @@ const complaintRoutes = require("./routes/complaintRoutes");
 
 const app = express();
 
-// ✅ Setup CORS correctly (do NOT repeat it below)
+// ✅ Proper CORS setup for frontend-backend communication
 app.use(cors({
   origin: true,
   credentials: true
 }));
 
-
-// Middleware to handle JSON & form-data
+// ✅ Middleware to parse JSON & form-data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
+// ✅ API Routes
 app.use("/api/agreements", agreementRoutes);
 app.use("/api/complaints", complaintRoutes);
 
-// MongoDB connection
+// ✅ Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB error:", err));
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// Start server
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));

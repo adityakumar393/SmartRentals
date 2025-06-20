@@ -1,62 +1,69 @@
-import React, { useEffect, useState } from "react";
+// src/components/AdminPanel.jsx
+import React from "react";
 import axios from "axios";
 
-const AdminPanel = () => {
-  const [complaints, setComplaints] = useState([]);
-
-  const fetchComplaints = async () => {
+const AdminPanel = ({ complaints, setComplaints }) => {
+  const handleResolve = async (id) => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/complaints`);
-      setComplaints(res.data);
-    } catch (err) {
-      console.error("Failed to fetch complaints", err);
+      const res = await axios.patch(`${import.meta.env.VITE_API_URL}/api/complaints/${id}`);
+
+      // Update status in UI after resolving
+      setComplaints((prev) =>
+        prev.map((complaint) =>
+          complaint._id === id ? { ...complaint, status: "Resolved" } : complaint
+        )
+      );
+    } catch (error) {
+      console.error("Error updating complaint status:", error);
     }
   };
-
-  const updateStatus = async (id, newStatus) => {
-    try {
-      await axios.put(`${import.meta.env.VITE_API_URL}/api/complaints/${id}/status`, {
-        status: newStatus,
-      });
-      fetchComplaints(); // Refresh
-    } catch (err) {
-      console.error("Error updating status", err);
-    }
-  };
-
-  useEffect(() => {
-    fetchComplaints();
-  }, []);
 
   return (
-    <div className="p-6 bg-gray-900 text-white min-h-screen">
-      <h2 className="text-3xl font-bold mb-6">Admin Panel – Manage Complaints</h2>
-      <div className="grid gap-6">
-        {complaints.length === 0 ? (
-          <p>No complaints to display.</p>
-        ) : (
-          complaints.map((c) => (
-            <div key={c._id} className="p-4 bg-gray-800 rounded-lg shadow">
-              <img
-                src={c.imageUrl}
-                alt="Complaint"
-                className="w-64 h-64 object-contain mb-2 rounded border"
-              />
-              <p><strong>User:</strong> {c.user}</p>
-              <p><strong>Text:</strong> {c.text}</p>
-              <p><strong>Status:</strong> {c.status}</p>
-              <button
-                className="mt-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-white"
-                onClick={() =>
-                  updateStatus(c._id, c.status === "Pending" ? "Resolved" : "Pending")
-                }
-              >
-                Mark as {c.status === "Pending" ? "Resolved" : "Pending"}
-              </button>
+    <div className="bg-white p-6 rounded shadow-md max-w-5xl mx-auto mt-6">
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">🛠️ Admin Panel</h2>
+
+      {complaints.length === 0 ? (
+        <p className="text-gray-500 text-center">No complaints available.</p>
+      ) : (
+        <div className="space-y-4">
+          {complaints.map((complaint) => (
+            <div
+              key={complaint._id}
+              className="border border-gray-200 p-4 rounded shadow-sm bg-gray-50"
+            >
+              <p><strong>User:</strong> {complaint.user}</p>
+              <p><strong>Description:</strong> {complaint.text}</p>
+              {complaint.imageUrl && (
+                <img
+                  src={complaint.imageUrl}
+                  alt="Complaint"
+                  className="w-48 h-32 object-cover mt-2 border rounded"
+                />
+              )}
+              <p className="mt-2">
+                <strong>Status:</strong>{" "}
+                <span
+                  className={
+                    complaint.status === "Resolved"
+                      ? "text-green-600"
+                      : "text-yellow-600"
+                  }
+                >
+                  {complaint.status}
+                </span>
+              </p>
+              {complaint.status !== "Resolved" && (
+                <button
+                  onClick={() => handleResolve(complaint._id)}
+                  className="mt-3 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                >
+                  Mark as Resolved
+                </button>
+              )}
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
